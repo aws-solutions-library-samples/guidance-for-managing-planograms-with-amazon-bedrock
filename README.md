@@ -1,215 +1,270 @@
-# Guidance Title (required)
-
-The Guidance title should be consistent with the title established first in Alchemy.
-
-**Example:** *Guidance for Product Substitutions on AWS*
-
-This title correlates exactly to the Guidance it’s linked to, including its corresponding sample code repository. 
+# Guidance for Planogram Management on AWS
 
 
-## Table of Contents (required)
+## Table of Contents 
 
-List the top-level sections of the README template, along with a hyperlink to the specific section.
-
-### Required
-
-1. [Overview](#overview-required)
+1. [Overview](#overview)
     - [Cost](#cost)
-2. [Prerequisites](#prerequisites-required)
-    - [Operating System](#operating-system-required)
-3. [Deployment Steps](#deployment-steps-required)
-4. [Deployment Validation](#deployment-validation-required)
-5. [Running the Guidance](#running-the-guidance-required)
-6. [Next Steps](#next-steps-required)
-7. [Cleanup](#cleanup-required)
+2. [Prerequisites](#prerequisites)
+    - [Operating System](#operating-system)
+    - [Repository Structure] (#repository-structure)
+3. [Deployment Steps](#deployment-steps)
+4. [Deployment Validation](#deployment-validation)
+5. [Running the Guidance](#running-the-guidance)
+6. [Next Steps](#next-steps)
+7. [Cleanup](#cleanup)
+8. [Known Issues](#known-issues)
+9. [Notices](#notices)
+10.[Authors](#authors)
 
-***Optional***
+## Overview
+The Planogram Management System is a comprehensive solution for optimizing retail shelf layouts using AI-driven image analysis and compliance checking.
 
-8. [FAQ, known issues, additional considerations, and limitations](#faq-known-issues-additional-considerations-and-limitations-optional)
-9. [Revisions](#revisions-optional)
-10. [Notices](#notices-optional)
-11. [Authors](#authors-optional)
+This system allows retailers to generate, analyze, and compare planograms (visual representations of product layouts) with actual shelf images. It leverages advanced technologies like computer vision and machine learning to ensure optimal product placement and compliance with predefined rules.
 
-## Overview (required)
+<img width="676" alt="architecture for planogram management on AWS" src="https://github.com/aws-solutions-library-samples/guidance-for-planogram-management-using-amazon-bedrock/assets/architecture.png">
 
-1. Provide a brief overview explaining the what, why, or how of your Guidance. You can answer any one of the following to help you write this:
+### Cost
 
-    - **Why did you build this Guidance?**
-    - **What problem does this Guidance solve?**
+_You are responsible for the cost of the AWS services used while running this Guidance. As of April 2025, the cost for running this Guidance with the default settings in the us-west-2 Region is approximately $<n.nn> per month for processing ( <nnnnn> records )._
 
-2. Include the architecture diagram image, as well as the steps explaining the high-level overview and flow of the architecture. 
-    - To add a screenshot, create an ‘assets/images’ folder in your repository and upload your screenshot to it. Then, using the relative file path, add it to your README. 
+_We recommend creating a [Budget](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) through [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) to help manage costs. Prices are subject to change. For full details, refer to the pricing webpage for each AWS service used in this Guidance._
 
-### Cost ( required )
-
-This section is for a high-level cost estimate. Think of a likely straightforward scenario with reasonable assumptions based on the problem the Guidance is trying to solve. Provide an in-depth cost breakdown table in this section below ( you should use AWS Pricing Calculator to generate cost breakdown ).
-
-Start this section with the following boilerplate text:
-
-_You are responsible for the cost of the AWS services used while running this Guidance. As of <month> <year>, the cost for running this Guidance with the default settings in the <Default AWS Region (Most likely will be US East (N. Virginia)) > is approximately $<n.nn> per month for processing ( <nnnnn> records )._
-
-Replace this amount with the approximate cost for running your Guidance in the default Region. This estimate should be per month and for processing/serving resonable number of requests/entities.
-
-Suggest you keep this boilerplate text:
-_We recommend creating a [Budget](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) through [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) to help manage costs. Prices are subject to change. For full details, refer to the pricing webpage for each AWS service used in this Guidance._
-
-### Sample Cost Table ( required )
-
-**Note : Once you have created a sample cost table using AWS Pricing Calculator, copy the cost breakdown to below table and upload a PDF of the cost estimation on BuilderSpace. Do not add the link to the pricing calculator in the ReadMe.**
-
-The following table provides a sample cost breakdown for deploying this Guidance with the default parameters in the US East (N. Virginia) Region for one month.
-
+### Sample Cost Table
+The following table provides a sample cost breakdown for deploying this Guidance with the default parameters in the <Default AWS Region> for one month.
 | AWS service  | Dimensions | Cost [USD] |
-| ----------- | ------------ | ------------ |
-| Amazon API Gateway | 1,000,000 REST API calls per month  | $ 3.50month |
-| Amazon Cognito | 1,000 active users per month without advanced security feature | $ 0.00 |
+| -----------  | ---------- | ---------- |
+|
+|
+|
+|
+|              |    Total:  |            |
 
-## Prerequisites (required)
+## Prerequisites 
 
-### Operating System (required)
+- Python 3.10+
+- Node.js 18+
+- AWS CLI configured with appropriate permissions
+- Docker
 
-- Talk about the base Operating System (OS) and environment that can be used to run or deploy this Guidance, such as *Mac, Linux, or Windows*. Include all installable packages or modules required for the deployment. 
-- By default, assume Amazon Linux 2/Amazon Linux 2023 AMI as the base environment. All packages that are not available by default in AMI must be listed out.  Include the specific version number of the package or module.
+### Operating System
+This sample code will deploy on Linux (Amazon Linux 2). To run locally, you will need to install and run Python on your local operating system, so Linux, Windows, and MacOS are acceptable.
 
-**Example:**
-“These deployment instructions are optimized to best work on **<Amazon Linux 2 AMI>**.  Deployment in another OS may require additional steps.”
+### Repository Structure
 
-- Include install commands for packages, if applicable.
+- `codebase/`: Contains the main application code
+  * `application.py`: Main Flask application entry point
+  * `Dockerfile`: Defines the container image for the application
+  * `requirements.txt`: Lists Python dependencies
+  * `util/`: Utility modules for planogram operations
+    - `planogram_compliance.py`: Compares shelf images to planograms
+    - `planogram_generation.py`: Generates planograms based on rules and metadata
+    - `planogram_rules.py`: Manages planogram rules and data transformation
+- `planogram-cdk/`: AWS CDK infrastructure code
+  * `bin/planogram-cdk.ts`: Entry point for CDK application
+  * `lib/`: Contains stack definitions for various AWS services
+- `extract_*.py`: Scripts for extracting data from various AWS services
+- Configuration files: `dynamodb_data.json`, `ssm_parameters.json`
 
-
-### Third-party tools (If applicable)
-
-*List any installable third-party tools required for deployment.*
-
-
-### AWS account requirements (If applicable)
-
-*List out pre-requisites required on the AWS account if applicable, this includes enabling AWS regions, requiring ACM certificate.*
-
-**Example:** “This deployment requires you have public ACM certificate available in your AWS account”
-
-**Example resources:**
-- ACM certificate 
-- DNS record
-- S3 bucket
-- VPC
-- IAM role with specific permissions
-- Enabling a Region or service etc.
-
-
-### aws cdk bootstrap (if sample code has aws-cdk)
-
-<If using aws-cdk, include steps for account bootstrap for new cdk users.>
-
-**Example blurb:** “This Guidance uses aws-cdk. If you are using aws-cdk for first time, please perform the below bootstrapping....”
-
-### Service limits  (if applicable)
-
-<Talk about any critical service limits that affect the regular functioning of the Guidance. If the Guidance requires service limit increase, include the service name, limit name and link to the service quotas page.>
-
-### Supported Regions (if applicable)
-
-<If the Guidance is built for specific AWS Regions, or if the services used in the Guidance do not support all Regions, please specify the Region this Guidance is best suited for>
+### AWS CDK Bootstrap
+If using aws-cdk for the first time, you will need to bootstrap your account.
+<insert instructions for bootstrapping new CDK users>
 
 
-## Deployment Steps (required)
+## Deployment Steps
 
-Deployment steps must be numbered, comprehensive, and usable to customers at any level of AWS expertise. The steps must include the precise commands to run, and describe the action it performs.
+### Installation
 
-* All steps must be numbered.
-* If the step requires manual actions from the AWS console, include a screenshot if possible.
-* The steps must start with the following command to clone the repo. ```git clone xxxxxxx```
-* If applicable, provide instructions to create the Python virtual environment, and installing the packages using ```requirement.txt```.
-* If applicable, provide instructions to capture the deployed resource ARN or ID using the CLI command (recommended), or console action.
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   cd planogram-management-system
+   ```
 
+2. Install CDK dependencies:
+   ```
+   cd planogram-cdk
+   npm install
+   ```
+
+### Deployment
+
+
+The application is deployed using AWS CDK. The `deploy-cdk.sh` script in the `planogram-cdk` directory handles the deployment process, including:
+
+1. Bootstrapping the CDK environment
+2. Synthesizing and deploying the DynamoDB stack
+3. Synthesizing and deploying the S3 stack
+4. Copying planogram images to the S3 bucket
+5. Managing the ECR repository
+6. Deploying the ECS stack with the application
+
+After deployment, the script outputs the DNS name of the Application Load Balancer, which can be used to access the application.
+
+There are two deployment options: deploying to an AWS-hosted website or deploying locally. To deploy to an AWS website:
+
+1. Deploy the CDK stacks in your AWS Account:
+   ```
+   #Set the environment variables
+   export AWS_ACCOUNT_ID=<Your AWS Account ID>
+   export AWS_REGION=<Intended AWS Region>
+   export CONSUMER_PUBLIC_IP=<Public IP Address of the network>
+   cd planogram-cdk
+   npm install
+   npm run build 
+   sh -x deploy-cdk.sh
+   ```
+
+   This script will deploy the following stacks:
+   - PlanogramDynamoStack
+   - PlanogramS3Stack
+   - PlanogramEcrStack
+   - PlanogramEcsStack
+
+2. After deployment, note the Load Balancer DNS for accessing the application.
+
+
+### Deploying to Run Locally
+
+To run the application locally for development:
+
+1. Run the Flask application:
+   ```
+   cd planogram-cdk
+   npm install
+   cdk bootstrap
+   cdk synth
+   cdk deploy PlanogramDynamoStack --require-approval never
+   cdk deploy PlanogramS3Stack --require-approval never
+   cd ../codebase
+   python3 -m venv venv
+   source venv/bin/activate
+   pip3 install -r requirements.txt
+   python3 application.py
+   ```
+
+3. Access the application at `http://localhost:8000`
+
+
+### Infrastructure
+
+The application is deployed on AWS using the following resources:
+
+- ECS (Elastic Container Service):
+  * Fargate cluster for running the application containers
+  * Task definition with 8192 MB memory and 4096 CPU units
+  * Fargate service with desired count of 2 tasks
+
+- VPC:
+  * Public and private subnets across 2 Availability Zones
+  * NAT Gateway for outbound internet access from private subnets
+  * VPC Endpoints for ECR and S3 access
+
+- Application Load Balancer:
+  * Internet-facing, distributing traffic to the ECS tasks
+  * Listener on port 80, forwarding to a target group
+
+- DynamoDB:
+  * Tables for storing planogram instructions, models, rules, templates, and product metadata
+
+- S3:
+  * Bucket for storing planogram images and other static assets
+
+- ECR (Elastic Container Registry):
+  * Repository for storing the application's Docker image
+
+### Data Flow
+
+1. User uploads an image or selects a demo shelf image through the web interface.
+2. The image is sent to the backend Flask application.
+3. The application uses the YOLOv8 object detection model to identify products in the shelf image.
+4. The detected products are compared against the selected planogram template.
+5. Results are processed, including highlighting misplaced items and calculating compliance scores.
+6. The processed results are sent back to the frontend for display.
+
+For planogram generation:
+1. User inputs instructions and selects rules.
+2. The backend retrieves product metadata and applies selected rules.
+3. An LLM (e.g., Claude) is used to generate planogram instructions.
+4. The instructions are used to create a visual representation of the planogram.
+5. The generated planogram is returned to the frontend for display.
+
+```
+[User] -> [Web Interface] -> [Flask Backend] -> [YOLOv8 Model]
+                                             -> [Planogram Comparison]
+                                             -> [LLM for Generation]
+                                             -> [DynamoDB/S3 for data]
+        <- [Results Display] <- [Processed Results]
+```
+
+
+## Deployment Validation
+If deployed successfully, the application will be hosted at http://<Load Balancer DNS> if deployed to run on an AWS website. If running locally, it will be accessible at http://localhost:8000.
  
-**Example:**
 
-1. Clone the repo using command ```git clone xxxxxxxxxx```
-2. cd to the repo folder ```cd <repo-name>```
-3. Install packages in requirements using command ```pip install requirement.txt```
-4. Edit content of **file-name** and replace **s3-bucket** with the bucket name in your account.
-5. Run this command to deploy the stack ```cdk deploy``` 
-6. Capture the domain name created by running this CLI command ```aws apigateway ............```
+## Running the Guidance
 
-
-
-## Deployment Validation  (required)
-
-<Provide steps to validate a successful deployment, such as terminal output, verifying that the resource is created, status of the CloudFormation template, etc.>
+1. To generate a new planogram, provide instructions, select rules, and choose an LLM model.
+2. Click "Generate Planogram" to create a new planogram based on your inputs.
+3. Upload a shelf image or select a demo shelf image.
+4. Choose a planogram template for comparison.
+5. Click "Check Planogram" to analyze the shelf image against the selected planogram.
+6. View the results, including the planogram, current shelf image, and highlighted misplaced items.
 
 
-**Examples:**
-
-* Open CloudFormation console and verify the status of the template with the name starting with xxxxxx.
-* If deployment is successful, you should see an active database instance with the name starting with <xxxxx> in        the RDS console.
-*  Run the following CLI command to validate the deployment: ```aws cloudformation describe xxxxxxxxxxxxx```
-
-
-
-## Running the Guidance (required)
-
-<Provide instructions to run the Guidance with the sample data or input provided, and interpret the output received.> 
-
-This section should include:
-
-* Guidance inputs
-* Commands to run
-* Expected output (provide screenshot if possible)
-* Output description
+## Next Steps
+<What other things can the user do with this? Ideas:
+ - Replace LLM instructions with details related to your planogram requirements and replace images in S3 with the required products
+ - Replace data used by the knowledge base to tune results
+ - Train a foundational model on images of your product to generate a planogram without stored images
 
 
+## Cleanup
+1. Destroy the CDK stacks in your AWS Account:
+   ```
+   #Set the environment variables
+   export AWS_ACCOUNT_ID=<Your AWS Account ID>
+   export AWS_REGION=<Intended AWS Region>
+   export CONSUMER_PUBLIC_IP=<Public IP Address of the network>
+   cd planogram-cdk
+   sh -x destroy-cdk.sh
+   ```
 
-## Next Steps (required)
-
-Provide suggestions and recommendations about how customers can modify the parameters and the components of the Guidance to further enhance it according to their requirements.
-
-
-## Cleanup (required)
-
-- Include detailed instructions, commands, and console actions to delete the deployed Guidance.
-- If the Guidance requires manual deletion of resources, such as the content of an S3 bucket, please specify.
-
-
-
-## FAQ, known issues, additional considerations, and limitations (optional)
-
-
-**Known issues (optional)**
-
-<If there are common known issues, or errors that can occur during the Guidance deployment, describe the issue and resolution steps here>
+   This script will destroy the following stacks:
+   - PlanogramDynamoStack
+   - PlanogramS3Stack
+   - PlanogramEcrStack
+   - PlanogramEcsStack
 
 
-**Additional considerations (if applicable)**
+## Known issues
 
-<Include considerations the customer must know while using the Guidance, such as anti-patterns, or billing considerations.>
+1. Image Upload Issues:
+   - Ensure the image is in a supported format (JPEG, PNG)
+   - Check the file size limit (typically 10MB)
+   - Verify S3 bucket permissions
 
-**Examples:**
+2. Planogram Generation Errors:
+   - Check the selected rules for conflicts
+   - Ensure the LLM service (e.g., Claude) is accessible
+   - Verify product metadata is up-to-date in DynamoDB
 
-- “This Guidance creates a public AWS bucket required for the use-case.”
-- “This Guidance created an Amazon SageMaker notebook that is billed per hour irrespective of usage.”
-- “This Guidance creates unauthenticated public API endpoints.”
+3. Performance Issues:
+   - Monitor ECS task CPU and memory usage
+   - Check Application Load Balancer request counts and latency
+   - Verify DynamoDB read/write capacity units
+
+For detailed logs:
+- Check CloudWatch Logs for the ECS tasks (stream prefix: 'planogram-app-logs')
+- Review Application Load Balancer access logs
+- Inspect Cognito sign-in attempts in CloudTrail
 
 
-Provide a link to the *GitHub issues page* for users to provide feedback.
+## Notices
 
-
-**Example:** *“For any feedback, questions, or suggestions, please use the issues tab under this repo.”*
-
-## Revisions (optional)
-
-Document all notable changes to this project.
-
-Consider formatting this section based on Keep a Changelog, and adhering to Semantic Versioning.
-
-## Notices (optional)
-
-Include a legal disclaimer
-
-**Example:**
 *Customers are responsible for making their own independent assessment of the information in this Guidance. This Guidance: (a) is for informational purposes only, (b) represents AWS current product offerings and practices, which are subject to change without notice, and (c) does not create any commitments or assurances from AWS and its affiliates, suppliers or licensors. AWS products or services are provided “as is” without warranties, representations, or conditions of any kind, whether express or implied. AWS responsibilities and liabilities to its customers are controlled by AWS agreements, and this Guidance is not part of, nor does it modify, any agreement between AWS and its customers.*
 
+## Authors
+Abhijit Dutta
 
-## Authors (optional)
-
-Name of code contributors
+Wilson Thankachan
