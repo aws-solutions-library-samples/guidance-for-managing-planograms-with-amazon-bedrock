@@ -7,7 +7,6 @@
     - [Cost](#cost)
 2. [Prerequisites](#prerequisites)
     - [Operating System](#operating-system)
-    - [Repository Structure] (#repository-structure)
 3. [Deployment Steps](#deployment-steps)
 4. [Deployment Validation](#deployment-validation)
 5. [Running the Guidance](#running-the-guidance)
