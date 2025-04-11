@@ -21,7 +21,7 @@ The Planogram Management System is a comprehensive solution for optimizing retai
 
 This system allows retailers to generate, analyze, and compare planograms (visual representations of product layouts) with actual shelf images. It leverages advanced technologies like computer vision and machine learning to ensure optimal product placement and compliance with predefined rules.
 
-<img width="676" alt="architecture for planogram management on AWS" src="https://github.com/aws-solutions-library-samples/guidance-for-planogram-management-using-amazon-bedrock/assets/architecture.png">
+<img width="676" alt="architecture for planogram management on AWS" src="assets/architecture.png">
 
 ### Cost
 
