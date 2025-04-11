@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planogram Compliance Detection Web App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+    <style>
+        body {
+            background-image: url("https://d1dkulh9pqc6xi.cloudfront.net/default-assets/image/cognito-image-background-page-light.svg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0);
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        #overlay.spinner {
+            position: absolute;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        function uncheckAll() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        }
+        function populateInstructions() {
+            document.getElementById('instructions').value = document.getElementById('cannedInstruction').value
+        }
+    </script>
+</head>
+<body">
+    <div class="container mt-5">
+        <h1 class="mb-4">Planogram Generation and Validation Web App</h1>
+        <h2 class="lead">Welcome!</h2>
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="generation-tab" data-bs-toggle="tab" data-bs-target="#generation" type="button" role="tab" aria-controls="generation" aria-selected="true"><b>Planogram Generation</b></button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="validation-tab" data-bs-toggle="tab" data-bs-target="#validation" type="button" role="tab" aria-controls="validation" aria-selected="false"><b>Planogram Compliance</b></button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="generation" role="tabpanel" aria-labelledby="generation-tab">
+                <div class="row mb-7 mt-7">
+                    <div class="col-md-2">
+                        <br/>
+                        <div class="mb-2">
+                            <label for="llmList" class="form-label"><b>Choose an LLM</b></label>
+                            <select id="llmList" class="form-select">
+                                <option value="anthropic.claude-3-haiku-20240307-v1:0" selected>Please select</option>                              
+                                {% for llmModel in llmModels %}
+                                    <option value="{{ llmModel.modelId }}">{{ llmModel.modelName }}</option>
+                                {% endfor %}
+                            </select>
+                            <br/>
+                            <label for="planogramRules" class="form-label"><b>Select planogram rules</b></label>
+                            <br/>
+                            {% for planogramRule in planogramRules %}
+                                <input type="checkbox" id="planogramRules" name="planogramRules" value="{{ planogramRule.ruleCode }}"/>
+                                &nbsp;{{ planogramRule.ruleType }}
+                                <br/>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <br/>
+                        <div class="mb-8">
+                            <label for="planGen" class="form-label"><b>Add your own instructions or use the following</b></label>
+                            <select id="cannedInstruction" class="form-select" onchange="populateInstructions();">
+                                <option value="" selected>Please select</option>                              
+                                {% for instruction in cannedInstructions %}
+                                    <option value="{{ instruction.instruction }}">{{ instruction.label }}</option>
+                                {% endfor %}
+                            </select>
+                            <br/>
+                            <textarea class="form-control" placeholder="Example instructions: create a shelf with 3 rows and 3 columns, then add 4 pepsi cans in the first row first column, 2 Seven Up cans in first row second column, 5 pepsi bottles on the 2nd row 1st column, 3 coke cans on the 2nd row 2nd column" 
+                                    id="instructions" name="instructions" rows="7" required></textarea>
+                            <div class="invalid-feedback">Example instructions: create a shelf with 3 rows and 3 columns, then add 4 pepsi cans in the first row first column, 2 Seven Up cans in first row second column, 5 pepsi bottles on the 2nd row 1st column, 3 coke cans on the 2nd row 2nd column</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <br/>
+                        <label for="productList" class="form-label"><b>Product List</b></label>
+                        <div class="product-list border p-2" id="product-list" style="height: 243px; overflow-y: auto;">
+                            {% for product in products %}
+                                <div class="mb-3">
+                                    <div class="row mb-11 mt-11">
+                                        <div class="col-md-3">
+                                            {% if 'Bottle Case' in product.product%}
+                                                <img src="{{ product.productImage }}"  width="60" height="50" style="border: 1px solid #c8c5c5; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; text-align: center;"/>
+                                            {% elif 'Bottle' in product.product %}
+                                                &nbsp; <img src="{{ product.productImage }}" width="30" height="60" style="border: 1px solid #c8c5c5; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; text-align: center;"/>
+                                            {% elif 'Box' in product.product%}
+                                                <img src="{{ product.productImage }}" width="60" height="50" style="border: 1px solid #c8c5c5; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; text-align: center;"/>
+                                            {% elif 'Case' in product.product%}
+                                                <img src="{{ product.productImage }}" width="60" height="50" style="border: 1px solid #c8c5c5; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; text-align: center;"/>
+                                            {% elif 'Thin Can' in product.product%}
+                                                &nbsp;<img src="{{ product.productImage }}" width="30" height="55" style="border: 1px solid #c8c5c5; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; text-align: center;"/>
+                                            {% elif 'Can' in product.product%}
+                                                &nbsp;<img src="{{ product.productImage }}" width="30" height="45" style="border: 1px solid #c8c5c5; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; text-align: center;"/>
+                                            {% else %}
+                                                <img src="{{ product.productImage }}" width="50" height="50" style="border: 1px solid #c8c5c5; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px; text-align: center;"/>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-md-8">
+                                            <span><u><b>{{ product.product }}</b></u>
+                                                <br/>
+                                                Brand: {{ product.brand }}
+                                                <br/>
+                                                UPC: {{ product.sku }}
+                                                <br/>    
+                                                Daily Sales Movement: {{ product.salesDetails.calculatedSalesVelocity }}
+                                                <br/>
+                                                Gross Profit: {{ product.salesDetails.grossProfitPercentage }}%  
+                                                <br/> 
+                                                Slotting Fee: {{ 'Yes' if product.slottingPricePerUnit>0 else 'No' }}                    
+                                                <br/>
+                                                Width: {{ product.dimensions.width }}″ 
+                                                &nbsp;
+                                                Height: {{ product.dimensions.height }}″ 
+                                                <br/> 
+                                                Weight: {{ product.dimensions.weight }} Oz
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="row mb-7 mt-7">
+                        <div class="col-md-2">
+                            <br/>
+                            <button id="generatePlanogram" class="btn btn-primary">Generate Planogram</button>
+                        </div>
+                    </div>
+                    <div id="planogramResults" class="mt-5" style="display: none;">
+                        <div class="slider-container">
+                            <div class="image-container">
+                                <h2>Generated Planogram</h2>
+                                <div class="row mb-10 mt-10">
+                                    <div class="col-md-3">
+                                        <label id="lblExplanation" name="lblExplanation">Explanation</label>
+                                        <br/>
+                                        <ul id="explanations" name="explanations">
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <label>Planogram</label>
+                                        <br/>
+                                        <img id="planogram-image" src="" alt="Planogram Image" class="result-image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="validation" role="tabpanel" aria-labelledby="validation-tab">
+                <div class="row mb-7 mt-7">
+                    <div class="col-md-8">
+                        <br/>
+                        <form id="uploadForm" enctype="multipart/form-data">
+                            <div class="mb-8">
+                                <label for="planogram" class="form-label"><b>Choose a planogram for compliance detection:</b></label>
+                                <select name="planogram" id="planogram" class="form-select">
+                                    <option value="" selected>Please Select</option>
+                                    {% for option in planogram_options %}
+                                        <option value="{{ option }}">{{ option }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <br/>
+                            <div id="shelf_example" style="display: none;">
+                                <div class="mb-8">
+                                    <label for="shelfImage" class="form-label"><b>Choose a shelf image for compliance detection:</b></label>
+                                    <select name="shelfImage" id="shelfImage" class="form-select">
+                                        <option value="" selected>Please Select</option>                                    
+                                    </select>
+                                </div>
+                                <br/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="file" class="form-label"><b>Upload image:</b></label>
+                                <input type="file" name="file" id="file" accept=".jpg,.png,.jpeg" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                        <div id="results" class="mt-5" style="display: none;">
+                            <h3>Results</h3>
+                            <div class="slider-container">
+                                <div class="image-container">
+                                    <div id="slider-label" class="image-label"></div>
+                                    <img id="slider-image" src="" alt="Slider Image" class="result-image">
+                                </div>
+                                <div class="slider-controls">
+                                    <button id="prev-button" class="btn btn-secondary">&lt; Previous</button>
+                                    <button id="next-button" class="btn btn-secondary">Next &gt;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="overlay">
+        <div class="spinner" align="center" style="padding-top: 300px;">
+            <img src="static/spinner/spinner.webp" alt="Loading..." height="100" width="100">
+        </div>
+    </div>
+</body>
+</html>

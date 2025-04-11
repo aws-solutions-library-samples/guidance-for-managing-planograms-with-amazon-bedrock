@@ -1,0 +1,255 @@
+[
+    {
+        "product": "Orange Soda Bottle",
+        "slottingPricePerUnit": 1,
+        "dimensions": {
+            "width": 2.5,
+            "weight": 16.9,
+            "height": 8
+        },
+        "brand": "Orange Soda",
+        "salesDetails": {
+            "calculatedSalesVelocity": 17,
+            "averageSalesVelocityPerDay": 23.96,
+            "grossProfitPercentage": 14.29,
+            "salesCycleLength": 46,
+            "winRate": 0.96,
+            "averageDealValue": 9.91,
+            "numberOfOpportunities": 856,
+            "costPerUnit": 4.94,
+            "calculatedProfitVelocity": 12.48
+        },
+        "sku": "0-12000-05245-5",
+        "productImage": "static/images/orange_soda_bottle.png"
+    },
+    {
+        "product": "Red Soda Can",
+        "slottingPricePerUnit": 0,
+        "dimensions": {
+            "width": 2.6,
+            "weight": 12,
+            "height": 4.83
+        },
+        "brand": "Red Soda",
+        "salesDetails": {
+            "calculatedSalesVelocity": 30,
+            "averageSalesVelocityPerDay": 27.28,
+            "grossProfitPercentage": 10.46,
+            "salesCycleLength": 53,
+            "winRate": 0.27,
+            "averageDealValue": 2.41,
+            "numberOfOpportunities": 328,
+            "costPerUnit": 2.67,
+            "calculatedProfitVelocity": 13.32
+        },
+        "sku": "0-12000-05241-1",
+        "productImage": "static/images/red_soda_can.png"
+    },
+    {
+        "product": "Iced Tea Bottle",
+        "slottingPricePerUnit": 1,
+        "dimensions": {
+            "width": 2.5,
+            "weight": 16.9,
+            "height": 8
+        },
+        "brand": "Iced Tea",
+        "salesDetails": {
+            "calculatedSalesVelocity": 17,
+            "averageSalesVelocityPerDay": 23.96,
+            "grossProfitPercentage": 14.29,
+            "salesCycleLength": 46,
+            "winRate": 0.96,
+            "averageDealValue": 9.91,
+            "numberOfOpportunities": 856,
+            "costPerUnit": 4.94,
+            "calculatedProfitVelocity": 12.48
+        },
+        "sku": "0-12000-05245-3",
+        "productImage": "static/images/iced_tea_bottle.png"
+    },
+    {
+        "product": "Red Soda Bottle",
+        "slottingPricePerUnit": 1,
+        "dimensions": {
+            "width": 2.5,
+            "weight": 52.8,
+            "height": 8
+        },
+        "brand": "Red Soda",
+        "salesDetails": {
+            "calculatedSalesVelocity": 17,
+            "averageSalesVelocityPerDay": 23.96,
+            "grossProfitPercentage": 14.29,
+            "salesCycleLength": 46,
+            "winRate": 0.96,
+            "averageDealValue": 9.91,
+            "numberOfOpportunities": 856,
+            "costPerUnit": 4.94,
+            "calculatedProfitVelocity": 12.48
+        },
+        "sku": "0-12000-05245-7",
+        "productImage": "static/images/red_soda_bottle.png"
+    },
+    {
+        "product": "Water Bottle",
+        "slottingPricePerUnit": 1,
+        "dimensions": {
+            "width": 2.5,
+            "weight": 20.8,
+            "height": 8
+        },
+        "brand": "Water",
+        "salesDetails": {
+            "calculatedSalesVelocity": 17,
+            "averageSalesVelocityPerDay": 23.96,
+            "grossProfitPercentage": 14.29,
+            "salesCycleLength": 46,
+            "winRate": 0.96,
+            "averageDealValue": 9.91,
+            "numberOfOpportunities": 856,
+            "costPerUnit": 4.94,
+            "calculatedProfitVelocity": 12.48
+        },
+        "sku": "0-12000-05245-8",
+        "productImage": "static/images/water_bottle.png"
+    },
+    {
+        "product": "Black Soda Can",
+        "slottingPricePerUnit": 0,
+        "dimensions": {
+            "width": 2.6,
+            "weight": 12,
+            "height": 4.83
+        },
+        "brand": "Black Soda",
+        "salesDetails": {
+            "calculatedSalesVelocity": 30,
+            "averageSalesVelocityPerDay": 27.28,
+            "grossProfitPercentage": 10.46,
+            "salesCycleLength": 53,
+            "winRate": 0.27,
+            "averageDealValue": 2.41,
+            "numberOfOpportunities": 328,
+            "costPerUnit": 2.67,
+            "calculatedProfitVelocity": 13.32
+        },
+        "sku": "0-12000-05241-2",
+        "productImage": "static/images/black_soda_can.png"
+    },
+    {
+        "product": "Green Soda Bottle",
+        "slottingPricePerUnit": 1,
+        "dimensions": {
+            "width": 2.5,
+            "weight": 16.9,
+            "height": 8
+        },
+        "brand": "Green Soda",
+        "salesDetails": {
+            "calculatedSalesVelocity": 17,
+            "averageSalesVelocityPerDay": 23.96,
+            "grossProfitPercentage": 14.29,
+            "salesCycleLength": 46,
+            "winRate": 0.96,
+            "averageDealValue": 9.91,
+            "numberOfOpportunities": 856,
+            "costPerUnit": 4.94,
+            "calculatedProfitVelocity": 12.48
+        },
+        "sku": "0-12000-05245-2",
+        "productImage": "static/images/green_soda_bottle.png"
+    },
+    {
+        "product": "Green Lemonade Bottle",
+        "slottingPricePerUnit": 1,
+        "dimensions": {
+            "width": 2.5,
+            "weight": 16.9,
+            "height": 8
+        },
+        "brand": "Green Lemonade",
+        "salesDetails": {
+            "calculatedSalesVelocity": 17,
+            "averageSalesVelocityPerDay": 23.96,
+            "grossProfitPercentage": 14.29,
+            "salesCycleLength": 46,
+            "winRate": 0.96,
+            "averageDealValue": 9.91,
+            "numberOfOpportunities": 856,
+            "costPerUnit": 4.94,
+            "calculatedProfitVelocity": 12.48
+        },
+        "sku": "0-12000-05245-1",
+        "productImage": "static/images/green_lemonade_bottle.png"
+    },
+    {
+        "product": "Orange Juice Bottle",
+        "slottingPricePerUnit": 1,
+        "dimensions": {
+            "width": 2.5,
+            "weight": 16.9,
+            "height": 8
+        },
+        "brand": "Orange Juice",
+        "salesDetails": {
+            "calculatedSalesVelocity": 17,
+            "averageSalesVelocityPerDay": 23.96,
+            "grossProfitPercentage": 14.29,
+            "salesCycleLength": 46,
+            "winRate": 0.96,
+            "averageDealValue": 9.91,
+            "numberOfOpportunities": 856,
+            "costPerUnit": 4.94,
+            "calculatedProfitVelocity": 12.48
+        },
+        "sku": "0-12000-05245-4",
+        "productImage": "static/images/orange_juice_bottle.png"
+    },
+    {
+        "product": "Red Lemonade Bottle",
+        "slottingPricePerUnit": 1,
+        "dimensions": {
+            "width": 2.5,
+            "weight": 16.9,
+            "height": 8
+        },
+        "brand": "Red Lemonade",
+        "salesDetails": {
+            "calculatedSalesVelocity": 17,
+            "averageSalesVelocityPerDay": 23.96,
+            "grossProfitPercentage": 14.29,
+            "salesCycleLength": 46,
+            "winRate": 0.96,
+            "averageDealValue": 9.91,
+            "numberOfOpportunities": 856,
+            "costPerUnit": 4.94,
+            "calculatedProfitVelocity": 12.48
+        },
+        "sku": "0-12000-05245-6",
+        "productImage": "static/images/red_lemonade_bottle.png"
+    },
+    {
+        "product": "Yellow Soda Can",
+        "slottingPricePerUnit": 0,
+        "dimensions": {
+            "width": 2.6,
+            "weight": 12,
+            "height": 4.83
+        },
+        "brand": "Yellow Soda",
+        "salesDetails": {
+            "calculatedSalesVelocity": 30,
+            "averageSalesVelocityPerDay": 27.28,
+            "grossProfitPercentage": 10.46,
+            "salesCycleLength": 53,
+            "winRate": 0.27,
+            "averageDealValue": 2.41,
+            "numberOfOpportunities": 328,
+            "costPerUnit": 2.67,
+            "calculatedProfitVelocity": 13.32
+        },
+        "sku": "0-12000-05241-2",
+        "productImage": "static/images/yellow_soda_can.png"
+    }
+]

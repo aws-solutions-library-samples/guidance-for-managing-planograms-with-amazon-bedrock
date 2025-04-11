@@ -1,0 +1,52 @@
+[
+  {
+    "Name": "/planogram/dynamodb/canned_instructions",
+    "Type": "String",
+    "Value": "PlanogramInstructions"
+  },
+  {
+    "Name": "/planogram/dynamodb/llms",
+    "Type": "String",
+    "Value": "PlanogramModels"
+  },
+  {
+    "Name": "/planogram/dynamodb/planogram_rules",
+    "Type": "String",
+    "Value": "PlanogramRules"
+  },
+  {
+    "Name": "/planogram/dynamodb/planogram_templates",
+    "Type": "String",
+    "Value": "PlanogramTemplates"
+  },
+  {
+    "Name": "/planogram/dynamodb/product_metadata",
+    "Type": "String",
+    "Value": "PlanogramProductMetadata"
+  },
+  {
+    "Name": "/planogram/dynamodb/qrcodes",
+    "Type": "String",
+    "Value": "PlanogramQRSecrets"
+  },
+  {
+    "Name": "/planogram/dynamodb/shelf_images",
+    "Type": "String",
+    "Value": "PlanogramShelfSamples"
+  },
+  {
+    "Name": "/planogram/instructions/parser/modelId",
+    "Type": "String",
+    "Value": "anthropic.claude-3-haiku-20240307-v1:0"
+  },
+  {
+    "Name": "/planogram/rules/parser/modelId",
+    "Type": "String",
+    "Value": "anthropic.claude-3-haiku-20240307-v1:0"
+  },
+  {
+    "Name": "/planogram/web/sessiontimeout",
+    "Type": "String",
+    "Value": "7200"
+  }
+]

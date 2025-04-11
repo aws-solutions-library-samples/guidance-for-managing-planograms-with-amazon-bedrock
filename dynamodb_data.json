@@ -1,0 +1,1117 @@
+{
+  "PlanogramInstructions": {
+    "metadata": {
+      "TableName": "PlanogramInstructions",
+      "KeySchema": [
+        {
+          "AttributeName": "label",
+          "KeyType": "HASH"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "label",
+          "AttributeType": "S"
+        }
+      ],
+      "BillingMode": "PROVISIONED"
+    },
+    "items": [
+      {
+        "label": {
+          "S": "4 by 4 shelves - With all products"
+        },
+        "instruction": {
+          "S": "Arrange 4x4 shelves"
+        }
+      },
+      {
+        "label": {
+          "S": "2 by 2 Shelf - Individual Products in all boxes"
+        },
+        "instruction": {
+          "S": "create a shelf with 2 rows and 2 columns, then add 4 red soda cans in the first row first column, 2 iced tea bottles in first row second column, 5 red soda bottles on the 2nd row 1st column, 3 black soda cans on the 2nd row 2nd column"
+        }
+      },
+      {
+        "instruction": {
+          "S": "create a shelf with 3 rows and 3 columns, then add 4 red soda cans in the first row first column, 2 yellow soda cans in first row second column, 5 red soda bottles on the 2nd row 1st column, 3 green soda bottles on the 3rd row 1st column"
+        },
+        "label": {
+          "S": "3 by 3 Shelf - Individual Products in all boxes"
+        }
+      },
+      {
+        "instruction": {
+          "S": "create a shelf with 2 rows and 2 columns, then add 4 red soda cans cans in the first row first column, after that 2 black soda cans in first row first column, 5 red soda bottles on the 2nd row 1st column, 3 yellow soda cans on the 2nd row 2nd column"
+        },
+        "label": {
+          "S": "2 by 2 shelf - Different products in a single box"
+        }
+      }
+    ]
+  },
+  "PlanogramModels": {
+    "metadata": {
+      "TableName": "PlanogramModels",
+      "KeySchema": [
+        {
+          "AttributeName": "modelName",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "modelId",
+          "KeyType": "RANGE"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "modelId",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "modelName",
+          "AttributeType": "S"
+        }
+      ],
+      "BillingMode": "PROVISIONED"
+    },
+    "items": [
+      {
+        "modelId": {
+          "S": "anthropic.claude-3-5-sonnet-20240620-v1:0"
+        },
+        "modelName": {
+          "S": "Claude 3.5 Sonnet"
+        }
+      },
+      {
+        "modelId": {
+          "S": "anthropic.claude-3-haiku-20240307-v1:0"
+        },
+        "modelName": {
+          "S": "Claude 3 Haiku"
+        }
+      }
+    ]
+  },
+  "PlanogramRules": {
+    "metadata": {
+      "TableName": "PlanogramRules",
+      "KeySchema": [
+        {
+          "AttributeName": "ruleName",
+          "KeyType": "HASH"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "ruleName",
+          "AttributeType": "S"
+        }
+      ],
+      "BillingMode": "PROVISIONED"
+    },
+    "items": [
+      {
+        "facing": {
+          "N": "4"
+        },
+        "ruleType": {
+          "S": "Daily Sales Movement"
+        },
+        "ruleName": {
+          "S": "HighDailySalesMovement"
+        },
+        "ruleCode": {
+          "S": "dailySalesMovement"
+        }
+      },
+      {
+        "shelfPlacement": {
+          "S": "bottom"
+        },
+        "ruleType": {
+          "S": "Product Dimensions"
+        },
+        "ruleName": {
+          "S": "LargerThan12InchesInAnyDirection"
+        },
+        "ruleCode": {
+          "S": "productDimensions"
+        },
+        "ignoreSlottingFee": {
+          "BOOL": true
+        }
+      },
+      {
+        "shelfPlacement": {
+          "S": "not middle"
+        },
+        "preferredShelfNumber": {
+          "N": "2"
+        },
+        "ruleType": {
+          "S": "Slotting Fee"
+        },
+        "ruleName": {
+          "S": "SlottingFeeEqualsZero"
+        },
+        "ruleCode": {
+          "S": "slottingFee"
+        }
+      },
+      {
+        "shelfPlacement": {
+          "S": "not middle"
+        },
+        "ruleType": {
+          "S": "Gross Profit"
+        },
+        "ruleName": {
+          "S": "GrossProfitLessThan20Percent"
+        },
+        "exceptions": {
+          "L": [
+            {
+              "S": "slotting fee is paid"
+            }
+          ]
+        },
+        "ruleCode": {
+          "S": "grossProfit"
+        }
+      },
+      {
+        "shelfPlacement": {
+          "S": "middle"
+        },
+        "conditions": {
+          "L": [
+            {
+              "S": "dimensions or weight do not force bottom shelf"
+            }
+          ]
+        },
+        "ruleType": {
+          "S": "Gross Profit"
+        },
+        "ruleName": {
+          "S": "GrossProfitGreaterThan30Percent"
+        },
+        "ruleCode": {
+          "S": "grossProfit"
+        }
+      },
+      {
+        "shelfPlacement": {
+          "S": "middle"
+        },
+        "preferredShelfNumber": {
+          "N": "2"
+        },
+        "ruleType": {
+          "S": "Slotting Fee"
+        },
+        "ruleName": {
+          "S": "SlottingFeeGreaterThanZero"
+        },
+        "ruleCode": {
+          "S": "slottingFee"
+        },
+        "overridesGrossProfit": {
+          "BOOL": true
+        }
+      },
+      {
+        "facing": {
+          "N": "2"
+        },
+        "ruleType": {
+          "S": "Daily Sales Movement"
+        },
+        "ruleName": {
+          "S": "LowDailySalesMovement"
+        },
+        "ruleCode": {
+          "S": "dailySalesMovement"
+        }
+      },
+      {
+        "shelfPlacement": {
+          "S": "bottom"
+        },
+        "ruleType": {
+          "S": "Item Weight"
+        },
+        "ruleName": {
+          "S": "GreaterThan48Oz"
+        },
+        "ruleCode": {
+          "S": "itemWeight"
+        },
+        "ignoreSlottingFee": {
+          "BOOL": true
+        }
+      }
+    ]
+  },
+  "PlanogramStore": {
+    "metadata": {
+      "TableName": "PlanogramStore",
+      "KeySchema": [
+        {
+          "AttributeName": "planogramName",
+          "KeyType": "HASH"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "planogramName",
+          "AttributeType": "S"
+        }
+      ],
+      "BillingMode": "PROVISIONED"
+    },
+    "items": [
+      {
+        "planogramName": {
+          "S": "Demo Products"
+        },
+        "fileLocation": {
+          "S": "static/input/planogram.jpg"
+        }
+      }
+    ]
+  },
+  "PlanogramTemplates": {
+    "metadata": {
+      "TableName": "PlanogramTemplates",
+      "KeySchema": [
+        {
+          "AttributeName": "planogramName",
+          "KeyType": "HASH"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "planogramName",
+          "AttributeType": "S"
+        }
+      ],
+      "BillingMode": "PROVISIONED"
+    },
+    "items": [
+      {
+        "planogramName": {
+          "S": "NRF 2025 Live Products"
+        },
+        "fileLocation": {
+          "S": "static/input/live_planogram.png"
+        }
+      },
+      {
+        "planogramName": {
+          "S": "Demo Products"
+        },
+        "fileLocation": {
+          "S": "static/input/demo_planogram_template.png"
+        }
+      }
+    ]
+  },
+  "PlanogramProductMetadata": {
+    "metadata": {
+      "TableName": "PlanogramProductMetadata",
+      "KeySchema": [
+        {
+          "AttributeName": "product",
+          "KeyType": "HASH"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "product",
+          "AttributeType": "S"
+        }
+      ],
+      "BillingMode": "PROVISIONED"
+    },
+    "items": [
+      {
+        "product": {
+          "S": "Orange Soda Bottle"
+        },
+        "slottingPricePerUnit": {
+          "N": "1"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.5"
+            },
+            "weight": {
+              "N": "16.9"
+            },
+            "height": {
+              "N": "8"
+            }
+          }
+        },
+        "brand": {
+          "S": "Orange Soda"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "17"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "23.96"
+            },
+            "grossProfitPercentage": {
+              "N": "14.29"
+            },
+            "salesCycleLength": {
+              "N": "46"
+            },
+            "winRate": {
+              "N": "0.96"
+            },
+            "averageDealValue": {
+              "N": "9.91"
+            },
+            "numberOfOpportunities": {
+              "N": "856"
+            },
+            "costPerUnit": {
+              "N": "4.94"
+            },
+            "calculatedProfitVelocity": {
+              "N": "12.48"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05245-5"
+        },
+        "productImage": {
+          "S": "static/images/orange_soda_bottle.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Red Soda Can"
+        },
+        "slottingPricePerUnit": {
+          "N": "0"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.6"
+            },
+            "weight": {
+              "N": "12"
+            },
+            "height": {
+              "N": "4.83"
+            }
+          }
+        },
+        "brand": {
+          "S": "Red Soda"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "30"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "27.28"
+            },
+            "grossProfitPercentage": {
+              "N": "10.46"
+            },
+            "salesCycleLength": {
+              "N": "53"
+            },
+            "winRate": {
+              "N": "0.27"
+            },
+            "averageDealValue": {
+              "N": "2.41"
+            },
+            "numberOfOpportunities": {
+              "N": "328"
+            },
+            "costPerUnit": {
+              "N": "2.67"
+            },
+            "calculatedProfitVelocity": {
+              "N": "13.32"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05241-1"
+        },
+        "productImage": {
+          "S": "static/images/red_soda_can.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Iced Tea Bottle"
+        },
+        "slottingPricePerUnit": {
+          "N": "1"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.5"
+            },
+            "weight": {
+              "N": "16.9"
+            },
+            "height": {
+              "N": "8"
+            }
+          }
+        },
+        "brand": {
+          "S": "Iced Tea"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "17"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "23.96"
+            },
+            "grossProfitPercentage": {
+              "N": "14.29"
+            },
+            "salesCycleLength": {
+              "N": "46"
+            },
+            "winRate": {
+              "N": "0.96"
+            },
+            "averageDealValue": {
+              "N": "9.91"
+            },
+            "numberOfOpportunities": {
+              "N": "856"
+            },
+            "costPerUnit": {
+              "N": "4.94"
+            },
+            "calculatedProfitVelocity": {
+              "N": "12.48"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05245-3"
+        },
+        "productImage": {
+          "S": "static/images/iced_tea_bottle.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Red Soda Bottle"
+        },
+        "slottingPricePerUnit": {
+          "N": "1"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.5"
+            },
+            "weight": {
+              "N": "52.8"
+            },
+            "height": {
+              "N": "8"
+            }
+          }
+        },
+        "brand": {
+          "S": "Red Soda"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "17"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "23.96"
+            },
+            "grossProfitPercentage": {
+              "N": "14.29"
+            },
+            "salesCycleLength": {
+              "N": "46"
+            },
+            "winRate": {
+              "N": "0.96"
+            },
+            "averageDealValue": {
+              "N": "9.91"
+            },
+            "numberOfOpportunities": {
+              "N": "856"
+            },
+            "costPerUnit": {
+              "N": "4.94"
+            },
+            "calculatedProfitVelocity": {
+              "N": "12.48"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05245-7"
+        },
+        "productImage": {
+          "S": "static/images/red_soda_bottle.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Water Bottle"
+        },
+        "slottingPricePerUnit": {
+          "N": "1"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.5"
+            },
+            "weight": {
+              "N": "20.8"
+            },
+            "height": {
+              "N": "8"
+            }
+          }
+        },
+        "brand": {
+          "S": "Water"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "17"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "23.96"
+            },
+            "grossProfitPercentage": {
+              "N": "14.29"
+            },
+            "salesCycleLength": {
+              "N": "46"
+            },
+            "winRate": {
+              "N": "0.96"
+            },
+            "averageDealValue": {
+              "N": "9.91"
+            },
+            "numberOfOpportunities": {
+              "N": "856"
+            },
+            "costPerUnit": {
+              "N": "4.94"
+            },
+            "calculatedProfitVelocity": {
+              "N": "12.48"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05245-8"
+        },
+        "productImage": {
+          "S": "static/images/water_bottle.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Black Soda Can"
+        },
+        "slottingPricePerUnit": {
+          "N": "0"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.6"
+            },
+            "weight": {
+              "N": "12"
+            },
+            "height": {
+              "N": "4.83"
+            }
+          }
+        },
+        "brand": {
+          "S": "Black Soda"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "30"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "27.28"
+            },
+            "grossProfitPercentage": {
+              "N": "10.46"
+            },
+            "salesCycleLength": {
+              "N": "53"
+            },
+            "winRate": {
+              "N": "0.27"
+            },
+            "averageDealValue": {
+              "N": "2.41"
+            },
+            "numberOfOpportunities": {
+              "N": "328"
+            },
+            "costPerUnit": {
+              "N": "2.67"
+            },
+            "calculatedProfitVelocity": {
+              "N": "13.32"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05241-2"
+        },
+        "productImage": {
+          "S": "static/images/black_soda_can.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Green Soda Bottle"
+        },
+        "slottingPricePerUnit": {
+          "N": "1"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.5"
+            },
+            "weight": {
+              "N": "16.9"
+            },
+            "height": {
+              "N": "8"
+            }
+          }
+        },
+        "brand": {
+          "S": "Green Soda"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "17"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "23.96"
+            },
+            "grossProfitPercentage": {
+              "N": "14.29"
+            },
+            "salesCycleLength": {
+              "N": "46"
+            },
+            "winRate": {
+              "N": "0.96"
+            },
+            "averageDealValue": {
+              "N": "9.91"
+            },
+            "numberOfOpportunities": {
+              "N": "856"
+            },
+            "costPerUnit": {
+              "N": "4.94"
+            },
+            "calculatedProfitVelocity": {
+              "N": "12.48"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05245-2"
+        },
+        "productImage": {
+          "S": "static/images/green_soda_bottle.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Green Lemonade Bottle"
+        },
+        "slottingPricePerUnit": {
+          "N": "1"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.5"
+            },
+            "weight": {
+              "N": "16.9"
+            },
+            "height": {
+              "N": "8"
+            }
+          }
+        },
+        "brand": {
+          "S": "Green Lemonade"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "17"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "23.96"
+            },
+            "grossProfitPercentage": {
+              "N": "14.29"
+            },
+            "salesCycleLength": {
+              "N": "46"
+            },
+            "winRate": {
+              "N": "0.96"
+            },
+            "averageDealValue": {
+              "N": "9.91"
+            },
+            "numberOfOpportunities": {
+              "N": "856"
+            },
+            "costPerUnit": {
+              "N": "4.94"
+            },
+            "calculatedProfitVelocity": {
+              "N": "12.48"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05245-1"
+        },
+        "productImage": {
+          "S": "static/images/green_lemonade_bottle.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Orange Juice Bottle"
+        },
+        "slottingPricePerUnit": {
+          "N": "1"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.5"
+            },
+            "weight": {
+              "N": "16.9"
+            },
+            "height": {
+              "N": "8"
+            }
+          }
+        },
+        "brand": {
+          "S": "Orange Juice"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "17"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "23.96"
+            },
+            "grossProfitPercentage": {
+              "N": "14.29"
+            },
+            "salesCycleLength": {
+              "N": "46"
+            },
+            "winRate": {
+              "N": "0.96"
+            },
+            "averageDealValue": {
+              "N": "9.91"
+            },
+            "numberOfOpportunities": {
+              "N": "856"
+            },
+            "costPerUnit": {
+              "N": "4.94"
+            },
+            "calculatedProfitVelocity": {
+              "N": "12.48"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05245-4"
+        },
+        "productImage": {
+          "S": "static/images/orange_juice_bottle.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Red Lemonade Bottle"
+        },
+        "slottingPricePerUnit": {
+          "N": "1"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.5"
+            },
+            "weight": {
+              "N": "16.9"
+            },
+            "height": {
+              "N": "8"
+            }
+          }
+        },
+        "brand": {
+          "S": "Red Lemonade"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "17"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "23.96"
+            },
+            "grossProfitPercentage": {
+              "N": "14.29"
+            },
+            "salesCycleLength": {
+              "N": "46"
+            },
+            "winRate": {
+              "N": "0.96"
+            },
+            "averageDealValue": {
+              "N": "9.91"
+            },
+            "numberOfOpportunities": {
+              "N": "856"
+            },
+            "costPerUnit": {
+              "N": "4.94"
+            },
+            "calculatedProfitVelocity": {
+              "N": "12.48"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05245-6"
+        },
+        "productImage": {
+          "S": "static/images/red_lemonade_bottle.png"
+        }
+      },
+      {
+        "product": {
+          "S": "Yellow Soda Can"
+        },
+        "slottingPricePerUnit": {
+          "N": "0"
+        },
+        "dimensions": {
+          "M": {
+            "width": {
+              "N": "2.6"
+            },
+            "weight": {
+              "N": "12"
+            },
+            "height": {
+              "N": "4.83"
+            }
+          }
+        },
+        "brand": {
+          "S": "Yellow Soda"
+        },
+        "salesDetails": {
+          "M": {
+            "calculatedSalesVelocity": {
+              "N": "30"
+            },
+            "averageSalesVelocityPerDay": {
+              "N": "27.28"
+            },
+            "grossProfitPercentage": {
+              "N": "10.46"
+            },
+            "salesCycleLength": {
+              "N": "53"
+            },
+            "winRate": {
+              "N": "0.27"
+            },
+            "averageDealValue": {
+              "N": "2.41"
+            },
+            "numberOfOpportunities": {
+              "N": "328"
+            },
+            "costPerUnit": {
+              "N": "2.67"
+            },
+            "calculatedProfitVelocity": {
+              "N": "13.32"
+            }
+          }
+        },
+        "sku": {
+          "S": "0-12000-05241-2"
+        },
+        "productImage": {
+          "S": "static/images/yellow_soda_can.png"
+        }
+      }
+    ]
+  },
+  "PlanogramQRSecrets": {
+    "metadata": {
+      "TableName": "PlanogramQRSecrets",
+      "KeySchema": [
+        {
+          "AttributeName": "secret",
+          "KeyType": "HASH"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "secret",
+          "AttributeType": "S"
+        }
+      ],
+      "BillingMode": "PROVISIONED"
+    },
+    "items": [
+      {
+        "secret": {
+          "S": "qjkAWJjYxoUeKCeanaU7bn2xVa-g6CgGest-dDG7v7A"
+        },
+        "expiration": {
+          "N": "1761429450"
+        },
+        "used": {
+          "BOOL": false
+        }
+      }
+    ]
+  },
+  "PlanogramShelfSamples": {
+    "metadata": {
+      "TableName": "PlanogramShelfSamples",
+      "KeySchema": [
+        {
+          "AttributeName": "shelfLabel",
+          "KeyType": "HASH"
+        },
+        {
+          "AttributeName": "planogramName",
+          "KeyType": "RANGE"
+        }
+      ],
+      "AttributeDefinitions": [
+        {
+          "AttributeName": "planogramName",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "shelfLabel",
+          "AttributeType": "S"
+        }
+      ],
+      "BillingMode": "PROVISIONED"
+    },
+    "items": [
+      {
+        "shelfImageLocation": {
+          "S": "s3://code-bucket-ad-20241001/static/shelfs/demo_planogram_shelf_2.png"
+        },
+        "planogramName": {
+          "S": "Demo Products"
+        },
+        "shelfLabel": {
+          "S": "Demo Products - Shelf 2"
+        }
+      },
+      {
+        "shelfImageLocation": {
+          "S": "s3://code-bucket-ad-20241001/static/shelfs/live_shelf_2.png"
+        },
+        "planogramName": {
+          "S": "NRF 2025 Live Products"
+        },
+        "shelfLabel": {
+          "S": "NRF 2025 Live Products - Shelf 2"
+        }
+      },
+      {
+        "shelfImageLocation": {
+          "S": "s3://code-bucket-ad-20241001/static/shelfs/live_shelf_1.png"
+        },
+        "planogramName": {
+          "S": "NRF 2025 Live Products"
+        },
+        "shelfLabel": {
+          "S": "NRF 2025 Live Products - Shelf 1"
+        }
+      },
+      {
+        "shelfImageLocation": {
+          "S": "s3://code-bucket-ad-20241001/static/shelfs/demo_planogram_shelf_1.png"
+        },
+        "planogramName": {
+          "S": "Demo Products"
+        },
+        "shelfLabel": {
+          "S": "Demo Products - Shelf 1"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "width": 1000,
+  "height": 376,
+  "objects": [
+    {
+      "id": "object_0",
+      "dimensions": {
+        "width": 51,
+        "height": 165,
+        "area": 8415
+      },
+      "position": {
+        "x": 193,
+        "y": 204
+      },
+      "color": {
+        "r": 127,
+        "g": 118,
+        "b": 142
+      },
+      "confidence": 0.7444424033164978
+    },
+    {
+      "id": "object_1",
+      "dimensions": {
+        "width": 48,
+        "height": 170,
+        "area": 8160
+      },
+      "position": {
+        "x": 0,
+        "y": 204
+      },
+      "color": {
+        "r": 121,
+        "g": 111,
+        "b": 134
+      },
+      "confidence": 0.6659903526306152
+    },
+    {
+      "id": "object_2",
+      "dimensions": {
+        "width": 48,
+        "height": 167,
+        "area": 8016
+      },
+      "position": {
+        "x": 146,
+        "y": 203
+      },
+      "color": {
+        "r": 123,
+        "g": 113,
+        "b": 137
+      },
+      "confidence": 0.6510461568832397
+    },
+    {
+      "id": "object_3",
+      "dimensions": {
+        "width": 47,
+        "height": 169,
+        "area": 7943
+      },
+      "position": {
+        "x": 98,
+        "y": 203
+      },
+      "color": {
+        "r": 120,
+        "g": 110,
+        "b": 134
+      },
+      "confidence": 0.6208008527755737
+    },
+    {
+      "id": "object_4",
+      "dimensions": {
+        "width": 48,
+        "height": 170,
+        "area": 8160
+      },
+      "position": {
+        "x": 49,
+        "y": 203
+      },
+      "color": {
+        "r": 122,
+        "g": 112,
+        "b": 136
+      },
+      "confidence": 0.6117784976959229
+    },
+    {
+      "id": "object_5",
+      "dimensions": {
+        "width": 69,
+        "height": 130,
+        "area": 8970
+      },
+      "position": {
+        "x": 213,
+        "y": 53
+      },
+      "color": {
+        "r": 96,
+        "g": 117,
+        "b": 195
+      },
+      "confidence": 0.2636309564113617
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Access</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .qr-container {
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body class="d-flex align-items-center min-vh-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-sm qr-container mx-auto">
+                    <div class="card-body text-center">
+                        <h1 class="card-title mb-4">Scan QR Code for Access</h1>
+                        <div class="qr-code mb-4">
+                            <img src="{{ url_for('login')}}" alt="QR Code" class="img-fluid">
+                        </div>
+                        <h5 class="card-subtitle mb-3 text-muted">Instructions</h5>
+                        <ol class="list-group list-group-numbered text-start mb-0">
+                            <li class="list-group-item">Open your smartphone's camera app</li>
+                            <li class="list-group-item">Point the camera at the QR code</li>
+                            <li class="list-group-item">Tap the notification to open the link</li>
+                            <li class="list-group-item">Access granted to the protected page!</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, if you need Bootstrap's JavaScript features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

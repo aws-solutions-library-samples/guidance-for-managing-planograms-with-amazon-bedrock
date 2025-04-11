@@ -1,0 +1,15 @@
+flask
+gunicorn
+werkzeug
+Pillow
+numpy
+opencv-python
+boto3
+sagemaker
+ultralytics
+matplotlib
+numpy
+qrcode
+flask-caching
+flask_cognito_lib
+python-jose

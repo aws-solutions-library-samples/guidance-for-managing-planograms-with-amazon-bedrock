@@ -1,0 +1,76 @@
+{
+    "planogramRules": [
+        {
+            "ruleType": "Daily Sales Movement",
+            "ruleCode": "dailySalesMovement",
+            "ruleLogics": [
+                {
+                    "ruleName": "HighDailySalesMovement",
+                    "facing": "4"
+                },
+                {
+                    "ruleName": "LowDailySalesMovement",
+                    "facing": "2"
+                }
+            ]
+        },
+        {
+            "ruleType": "Product Dimensions",
+            "ruleCode": "productDimensions",
+            "ruleLogics": [
+                {
+                    "ruleName": "LargerThan12InchesInAnyDirection",
+                    "shelfPlacement": "bottom",
+                    "ignoreSlottingFee": true
+                }
+            ]
+        },
+        {
+            "ruleType": "Slotting Fee",
+            "ruleCode": "slottingFee",
+            "ruleLogics": [
+                {
+                    "ruleName": "SlottingFeeEqualsZero",
+                    "shelfPlacement": "not middle"
+                },
+                {
+                    "ruleName": "SlottingFeeGreaterThanZero",
+                    "overridesGrossProfit": true,
+                    "shelfPlacement": "middle"
+                }
+            ],
+            "preferredShelfNumber": "2"
+        },
+        {
+            "ruleType": "Gross Profit",
+            "ruleCode": "grossProfit",
+            "ruleLogics": [
+                {
+                    "ruleName": "GrossProfitLessThan20Percent",
+                    "shelfPlacement": "not middle",
+                    "exceptions": [
+                        "slotting fee is paid"
+                    ]
+                },
+                {
+                    "ruleName": "GrossProfitGreaterThan30Percent",
+                    "shelfPlacement": "middle",
+                    "conditions": [
+                        "dimensions or weight do not force bottom shelf"
+                    ]
+                }
+            ]
+        },
+        {
+            "ruleType": "Item Weight",
+            "ruleCode": "itemWeight",
+            "ruleLogics": [
+                {
+                    "ruleName": "GreaterThan48Oz",
+                    "shelfPlacement": "bottom",
+                    "ignoreSlottingFee": true
+                }
+            ]
+        }
+    ]
+}
