@@ -14,7 +14,7 @@
 7. [Cleanup](#cleanup)
 8. [Known Issues](#known-issues)
 9. [Notices](#notices)
-10.[Authors](#authors)
+10. [Authors](#authors)
 
 ## Overview
 The Planogram Management System is a comprehensive solution for optimizing retail shelf layouts using AI-driven image analysis and compliance checking.
@@ -30,14 +30,17 @@ _You are responsible for the cost of the AWS services used while running this Gu
 _We recommend creating a [Budget](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html) through [AWS Cost Explorer](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/) to help manage costs. Prices are subject to change. For full details, refer to the pricing webpage for each AWS service used in this Guidance._
 
 ### Sample Cost Table
-The following table provides a sample cost breakdown for deploying this Guidance with the default parameters in the <Default AWS Region> for one month.
-| AWS service  | Dimensions | Cost [USD] |
-| -----------  | ---------- | ---------- |
-|
-|
-|
-|
-|              |    Total:  |            |
+The following table provides a sample cost breakdown for deploying this Guidance with the default parameters in the US-East Region for one month.
+| AWS service                       | Dimensions                                                               | Cost [USD] |
+| --------------------------------  | ------------------------------------------------------------------------ | ---------- |
+| AWS Fargate                       | Linux, x86, 24hrs avg duration, 2 tasks/day, 20GB storage, 8GB memory    | 288.30     |
+| Elastic Load Balancing            | 1 load balancer                                                          |  28.11     |
+| Amazon Elastic Container Registry | 4GB/month                                                                |    .40     |
+| Amazon Simple Storage Service     | Standard, 1GB/month, 1.5GB returned, 1GB scanned, 1000 each request type |    .03     |
+| Amazon DynamoDB                   | Standard table class, 1.5KB average item size, 1GB data storage size     |    .25     |
+| Amazon SageMaker                  | 10M requests/month, 5ms duration                                         |   1.00     |
+| Amazon Bedrock (Anthropic)        |                                                                          |    .02     |
+|                                   |    Total:                                                                | 318.11     |
 
 ## Prerequisites 
 
