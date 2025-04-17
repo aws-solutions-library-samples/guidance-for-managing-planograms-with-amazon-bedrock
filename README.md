@@ -47,7 +47,7 @@ The following table provides a sample cost breakdown for deploying this Guidance
 - Python 3.10+
 - Node.js 18+
 - AWS CLI configured with appropriate permissions
-- Docker
+- Docker Desktop
 
 ### Operating System
 This sample code will deploy on Linux (Amazon Linux 2). To run locally, you will need to install and run Python on your local operating system, so Linux, Windows, and MacOS are acceptable.
@@ -107,12 +107,11 @@ There are two deployment options: deploying to an AWS-hosted website or deployin
 
 1. Deploy the CDK stacks in your AWS Account:
    ```
+   #Run the following command from the "planogram-cdk" directory
    #Set the environment variables
    export AWS_ACCOUNT_ID=<Your AWS Account ID>
    export AWS_REGION=<Intended AWS Region>
    export CONSUMER_PUBLIC_IP=<Public IP Address of the network>
-   cd planogram-cdk
-   npm install
    npm run build 
    sh -x deploy-cdk.sh
    ```
@@ -123,7 +122,7 @@ There are two deployment options: deploying to an AWS-hosted website or deployin
    - PlanogramEcrStack
    - PlanogramEcsStack
 
-2. After deployment, note the Load Balancer DNS for accessing the application.
+2. After deployment, note the Load Balancer DNS “Planogram Demo URL” from the CDK output to access the application.
 
 
 ### Deploying to Run Locally
