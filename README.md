@@ -205,12 +205,16 @@ If deployed successfully, the application will be hosted at http://<Load Balance
 
 ## Running the Guidance
 
+# Planogram Generation
 1. To generate a new planogram, provide instructions, select rules, and choose an LLM model.
 2. Click "Generate Planogram" to create a new planogram based on your inputs.
-3. Upload a shelf image or select a demo shelf image.
-4. Choose a planogram template for comparison.
-5. Click "Check Planogram" to analyze the shelf image against the selected planogram.
-6. View the results, including the planogram, current shelf image, and highlighted misplaced items.
+3. Try various input parameter combinations to simulate various planogram ideas.
+
+# Planogram Validation
+1. Upload a shelf image or select a demo shelf image.
+2. Choose a planogram template for comparison.
+3. Click "Check Planogram" to analyze the shelf image against the selected planogram.
+4. View the results, including the planogram, current shelf image, and highlighted misplaced items.
 
 
 ## Next Steps
