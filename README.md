@@ -263,7 +263,6 @@ If deployed successfully, the application will be hosted at http://<Load Balance
 For detailed logs:
 - Check CloudWatch Logs for the ECS tasks (stream prefix: 'planogram-app-logs')
 - Review Application Load Balancer access logs
-- Inspect Cognito sign-in attempts in CloudTrail
 
 
 ## Notices
