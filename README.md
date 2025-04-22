@@ -240,6 +240,7 @@ If deployed successfully, the application will be hosted at http://<Load Balance
    - PlanogramS3Stack
    - PlanogramEcrStack
    - PlanogramEcsStack
+   - PlanogramSecurityStack
 
 
 ## Known issues
