@@ -17,7 +17,7 @@ async function main() {
             account: process.env.CDK_DEFAULT_ACCOUNT,
             region: process.env.CDK_DEFAULT_REGION,
         },
-        description: "Guidance for Planogram Management Using Amazon Bedrock (SO9012)"
+        description: "Guidance for Planogram Management on AWS (SO9012)"
     });
     new planogram_ecs_stack_1.PlanogramEcsStack(app, 'PlanogramEcsStack', {
         env: {
