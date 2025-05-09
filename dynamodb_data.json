@@ -1070,7 +1070,7 @@
     "items": [
       {
         "shelfImageLocation": {
-          "S": "s3://code-bucket-ad-20241001/static/shelfs/demo_planogram_shelf_2.png"
+          "S": "s3://XXXXXXXXXXXXX/static/shelfs/demo_planogram_shelf_2.png"
         },
         "planogramName": {
           "S": "Demo Products"
@@ -1081,7 +1081,7 @@
       },
       {
         "shelfImageLocation": {
-          "S": "s3://code-bucket-ad-20241001/static/shelfs/live_shelf_2.png"
+          "S": "s3://XXXXXXXXXXXXX/static/shelfs/live_shelf_2.png"
         },
         "planogramName": {
           "S": "NRF 2025 Live Products"
@@ -1092,7 +1092,7 @@
       },
       {
         "shelfImageLocation": {
-          "S": "s3://code-bucket-ad-20241001/static/shelfs/live_shelf_1.png"
+          "S": "s3://XXXXXXXXXXXXX/static/shelfs/live_shelf_1.png"
         },
         "planogramName": {
           "S": "NRF 2025 Live Products"
@@ -1103,7 +1103,7 @@
       },
       {
         "shelfImageLocation": {
-          "S": "s3://code-bucket-ad-20241001/static/shelfs/demo_planogram_shelf_1.png"
+          "S": "s3://XXXXXXXXXXXXX/static/shelfs/demo_planogram_shelf_1.png"
         },
         "planogramName": {
           "S": "Demo Products"

@@ -21,7 +21,7 @@ def download_s3_folder(bucket_name, s3_folder, local_dir):
             print(f"Downloaded {key} to {local_file_path}")
 
 # Usage
-bucket_name = 'code-bucket-ad-20241001'
+bucket_name = 'XXXXXXXXXXXXXXXXXXXXXXX'
 s3_folder = 'static/'
 local_dir = 's3data'
 
