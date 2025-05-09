@@ -80,7 +80,7 @@ If using aws-cdk for the first time, you will need to bootstrap your account.
 1. Clone the repository:
    ```
    git clone <repository-url>
-   cd planogram-management-system
+   cd guidance-for-planogram-management-on-aws
    ```
 
 2. Install CDK dependencies:
