@@ -15,7 +15,8 @@ export class PlanogramEcsStack extends cdk.Stack {
       const awsRegion = this.node.tryGetContext('awsRegion');
 
       const imageUri = `${awsAccountId}.dkr.ecr.${awsRegion}.amazonaws.com/planogram-app-repo:latest`;
-      
+      const imageArn = `arn:aws:ecr:${awsRegion}:${awsAccountId}:repository/planogram-app-repo`;
+      const planogramS3Bucket = this.node.tryGetContext('planogram_s3_bucket');;
       // Create VPC with public and private subnets
       const vpc = new ec2.Vpc(this, 'PlanogranTaskVPC', {
           maxAzs: 2,
@@ -63,9 +64,55 @@ export class PlanogramEcsStack extends cdk.Stack {
       executionRole.addToPolicy(new iam.PolicyStatement({
           effect: iam.Effect.ALLOW,
           actions: [
-            '*',
+            'ecr:GetDownloadUrlForLayer',
+            'ecr:BatchGetImage',
+            'ecr:BatchCheckLayerAvailability'
           ],
-          resources: ['*'],
+          resources: [`${imageArn}`],
+      }));
+      executionRole.addToPolicy(new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          actions: [
+            's3:ListBucket',
+            's3:GetObject',
+            's3:PutObject',
+            's3:DeleteObject'
+          ],
+          resources: [`arn:aws:s3:::${planogramS3Bucket}`,
+                      `arn:aws:s3:::${planogramS3Bucket}/*`],
+      }));
+      executionRole.addToPolicy(new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          actions: [
+            'dynamodb:PutItem',
+            'dynamodb:UpdateItem',
+            'dynamodb:DeleteItem',
+            'dynamodb:BatchWriteItem',
+            'dynamodb:GetItem',
+            'dynamodb:BatchGetItem',
+            'dynamodb:Scan',
+            'dynamodb:Query',
+            'dynamodb:ConditionCheckItem'
+          ],
+          resources: [`arn:aws:dynamodb:${awsRegion}:${awsAccountId}:table/Planogram*`],
+      }));
+      executionRole.addToPolicy(new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          actions: [
+            'ssm:DescribeParameters',
+            'ssm:GetParameter',
+            'ssm:GetParameters',
+            'ssm:PutParameter',
+            'ssm:DeleteParameter'
+          ],
+          resources: [`arn:aws:ssm:${awsRegion}:${awsAccountId}:parameter/planogram/*`],
+      }));
+      executionRole.addToPolicy(new iam.PolicyStatement({
+          effect: iam.Effect.ALLOW,
+          actions: [
+            'bedrock:*'
+          ],
+          resources: [`arn:aws:bedrock:${awsRegion}::foundation-model/anthropic.*`],
       }));
       // Create a new security group
       const taskSecurityGroup = new ec2.SecurityGroup(this, 'PlanogramTaskSecurityGroup', {

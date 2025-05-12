@@ -33,7 +33,7 @@ cdk destroy PlanogramEcrStack --force
 cdk deploy PlanogramEcrStack --context awsAccountId=${AWS_ACCOUNT_ID} --context awsRegion=${AWS_REGION} --require-approval never
 cdk synth PlanogramEcsStack
 cdk destroy PlanogramEcsStack --force
-cdk deploy PlanogramEcsStack --context awsAccountId=${AWS_ACCOUNT_ID} --context awsRegion=${AWS_REGION} --context consumer_public_ip=${CONSUMER_PUBLIC_IP} --require-approval never
+cdk deploy PlanogramEcsStack --context awsAccountId=${AWS_ACCOUNT_ID} --context awsRegion=${AWS_REGION} --context consumer_public_ip=${CONSUMER_PUBLIC_IP} --context planogram_s3_bucket=${IMAGE_BUCKET_NAME} --require-approval never
 rm -rf dnsName.txt
 aws cloudformation describe-stacks --stack-name PlanogramEcsStack --query 'Stacks[0].Outputs[?OutputKey==`PlanogramAppLoadBalancerDNS`].OutputValue' --output text > dnsName.txt
 export PLANOGRAM_LB_DNS=$(cat dnsName.txt)
