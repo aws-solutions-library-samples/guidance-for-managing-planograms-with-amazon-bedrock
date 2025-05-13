@@ -48,6 +48,22 @@ The following table provides a sample cost breakdown for deploying this Guidance
 - Node.js 18+
 - AWS CLI configured with appropriate permissions
 - Docker Desktop
+- The following Python libraries:
+  * flask
+  * gunicorn
+  * werkzeug
+  * Pillow
+  * numpy
+  * opencv-python
+  * boto3
+  * sagemaker
+  * ultralytics
+  * matplotlib
+  * numpy
+  * qrcode
+  * flask-caching
+  * flask_cognito_lib
+  * python-jose
 
 ### Operating System
 This sample code will deploy on Linux (Amazon Linux 2). To run locally, you will need to install and run Python on your local operating system, so Linux, Windows, and MacOS are acceptable.
