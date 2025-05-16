@@ -8,6 +8,7 @@ import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 export class PlanogramEcsStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+    this.templateOptions.description = 'Guidance name (SO9012)';
     const consumerPublicIP = this.node.tryGetContext('consumer_public_ip');
     if (consumerPublicIP !== undefined) {
       // Execute shell script to create the docker image and repository
