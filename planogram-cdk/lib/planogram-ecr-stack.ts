@@ -6,7 +6,7 @@ import { execSync } from 'child_process';
 export class PlanogramEcrStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-    
+    this.templateOptions.description = 'Guidance name (SO9012)';
     // Execute shell script to create the docker image and repository
     const awsAccountId = this.node.tryGetContext('awsAccountId');
     const awsRegion = this.node.tryGetContext('awsRegion');
