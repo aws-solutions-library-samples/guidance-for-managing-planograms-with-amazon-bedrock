@@ -9,7 +9,7 @@ import * as fs from 'fs';
 export class PlanogramDynamoStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
-
+    this.templateOptions.description = 'Guidance name (SO9012)';
     const dynamodbData = JSON.parse(fs.readFileSync('../dynamodb_data.json', 'utf-8'));
 
     for (const [tableName, tableInfo] of Object.entries(dynamodbData)) {
