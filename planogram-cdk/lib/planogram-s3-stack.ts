@@ -6,6 +6,7 @@ import * as ssm from 'aws-cdk-lib/aws-ssm';
 export class PlanogramS3Stack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+    this.templateOptions.description = 'Guidance name (SO9012)';
     // const awsRegion = this.node.tryGetContext('awsRegion');
     // const bucketName = `planogram-images-bucket-${awsRegion}`
     // Create a new S3 bucket
