@@ -6,6 +6,8 @@ import { Construct } from 'constructs';
 export class PlanogramSecurityStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
+    // Add a description to the stack
+    this.templateOptions.description = 'Guidance name (SO9012)';
     const existingSecurityGroupId = this.node.tryGetContext('securityGroupId');
     // Reference an existing security group
     if (existingSecurityGroupId !== undefined && existingSecurityGroupId.length !== 0){
